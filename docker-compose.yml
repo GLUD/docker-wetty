@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  term:
+    image: glud/wetty
+    networks:
+      - reverse_proxy
+    environment:
+      #WETTY_USER: term
+      #WETTY_PASSWORD: term
+      WETTY_USERS_FILE: /run/secrets/users
+    secrets:
+      - users
+
+secrets:
+  users:
+    file: ./users.priv #user:password
