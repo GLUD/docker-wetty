@@ -20,7 +20,8 @@ if [ ! -z "$WETTY_USERS_FILE" ]; then
  while read line; do
    user=$(echo $line | cut -d':' -f1)
 
-   useradd -d /home/$user -m -s /bin/bash $user
+   useradd -d /home/$user -m -s /bin/bash $user || true
+   chown -R $user: /home/$user
  done < "$WETTY_USERS_FILE"
 
  cat "$WETTY_USERS_FILE" | chpasswd
